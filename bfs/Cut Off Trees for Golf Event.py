@@ -1,5 +1,6 @@
 import copy
 
+
 class Solution(object):
     def cutOffTree(self, forest):
         """
@@ -36,23 +37,19 @@ class Solution(object):
         cur_pos = set([(y_pos, x_pos)])
         while cur_pos:
             y_pos, x_pos = cur_pos.pop()
-            if y_pos - 1 >= 0 and distance_list[y_pos - 1][x_pos] > 0 and distance_list[y_pos - 1][x_pos] > \
-                            distance_list[y_pos][x_pos] + 1:
+            if y_pos - 1 >= 0 and distance_list[y_pos - 1][x_pos] == 99999:
                 distance_list[y_pos - 1][x_pos] = distance_list[y_pos][x_pos] + 1
                 cur_pos.add((y_pos - 1, x_pos))
 
-            if y_pos + 1 < height and distance_list[y_pos + 1][x_pos] > 0 and distance_list[y_pos + 1][x_pos] > \
-                            distance_list[y_pos][x_pos] + 1:
+            if y_pos + 1 < height and distance_list[y_pos + 1][x_pos]== 99999:
                 distance_list[y_pos + 1][x_pos] = distance_list[y_pos][x_pos] + 1
                 cur_pos.add((y_pos + 1, x_pos))
 
-            if x_pos - 1 >= 0 and distance_list[y_pos][x_pos - 1] > 0 and distance_list[y_pos][x_pos - 1] > \
-                            distance_list[y_pos][x_pos] + 1:
+            if x_pos - 1 >= 0 and distance_list[y_pos][x_pos - 1] == 99999:
                 distance_list[y_pos][x_pos - 1] = distance_list[y_pos][x_pos] + 1
                 cur_pos.add((y_pos, x_pos - 1))
 
-            if x_pos + 1 < width and distance_list[y_pos][x_pos + 1] > 0 and distance_list[y_pos][x_pos + 1] > \
-                            distance_list[y_pos][x_pos] + 1:
+            if x_pos + 1 < width and distance_list[y_pos][x_pos + 1] == 99999:
                 distance_list[y_pos][x_pos + 1] = distance_list[y_pos][x_pos] + 1
                 cur_pos.add((y_pos, x_pos + 1))
         return distance_list

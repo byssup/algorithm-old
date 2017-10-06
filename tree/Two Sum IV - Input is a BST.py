@@ -4,7 +4,6 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-import bisect
 
 
 class Solution(object):
@@ -15,17 +14,17 @@ class Solution(object):
         :rtype: bool
         """
         nums = self.get_nums(root)
-        for i, num in enumerate(nums):
-            j = bisect.bisect_left(nums, k - num)
-            if i != j < len(nums) and nums[j] == k - num:
+        while nums:
+            num = nums.pop()
+            if k - num in nums:
                 return True
         return False
 
     def get_nums(self, node):
         if node:
-            res = []
-            res.extend(self.get_nums(node.left))
-            res.append(node.val)
-            res.extend(self.get_nums(node.right))
+            res = set()
+            res = res.union(self.get_nums(node.left))
+            res.add(node.val)
+            res = res.union(self.get_nums(node.right))
             return res
-        return []
+        return set()

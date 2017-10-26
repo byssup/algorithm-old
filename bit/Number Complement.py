@@ -4,8 +4,6 @@ class Solution(object):
         :type num: int
         :rtype: int
         """
-
-
         for n in range(1,33):
             if pow(2, n) - 1>= num:
                 return num ^ pow(2, n) - 1

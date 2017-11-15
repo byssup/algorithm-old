@@ -7,10 +7,21 @@ class Solution(object):
         :type k: int
         :rtype: List[str]
         """
-        count_dict = defaultdict(lambda: 0)
+        count = defaultdict(lambda : 0)
         for word in words:
-            count_dict[word] += 1
-        count_items = count_dict.items()
-        count_items.sort(lambda x, y: -cmp(x[1], y[1]) or cmp(x[0], y[0]))
-        answer = [count_item[0] for count_item in count_items[:k]]
+            count[word] += 1
+        freq_dict = defaultdict(lambda : [])
+        for word, freq in count.items():
+            freq_dict[freq].append(word)
+        answer = []
+        key = max(freq_dict.keys())
+        while key > 0 and len(answer) < k:
+            if key in freq_dict:
+                freq_dict[key].sort()
+                answer.extend(freq_dict[key][:k - len(answer)])
+            key -= 1
+
         return answer
+
+
+        
